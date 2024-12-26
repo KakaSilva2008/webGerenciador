@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Tarefa</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="validation.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Editar Tarefa</h1>
+    </header>
+    <main>
+        <form id="edit-task-form">
+            <label for="title">Título da Tarefa:</label>
+            <input type="text" id="title" name="title" value="Título Atual" required>
+
+            <label for="description">Descrição:</label>
+            <textarea id="description" name="description" required>Descrição Atual</textarea>
+
+            <label for="due-date">Data de Conclusão:</label>
+            <input type="date" id="due-date" name="due-date" value="2024-12-31" required>
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+        <p><a href="tasks.html">Voltar para Lista de Tarefas</a></p>
+    </main>
+</body>
+</html>

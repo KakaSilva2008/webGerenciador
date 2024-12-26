@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            const tbody = document.querySelector('tbody');
+
+            // Carregar as tarefas para a tabela.
+            function loadTasks() {
+                tbody.innerHTML = ''; // Limpa a tabela.
+                if (tasks.length === 0) {
+                    const row = document.createElement('tr');
+                    const cell = document.createElement('td');
+                    cell.colSpan = 4;
+                    cell.textContent = 'Nenhuma tarefa cadastrada.';
+                    row.appendChild(cell);
+                    tbody.appendChild(row);
+                    return;
+                }
+
+                tasks.forEach((task, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${task.title}</td>
+                        <td>${task.description}</td>
+                        <td>${task.dueDate}</td>
+                        <td>
+                            <button class="edit-btn" data-index="${index}">Editar</button>
+                            <button class="delete-btn" data-index="${index}">Excluir</button>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
+
+            // Excluir uma tarefa.
+            tbody.addEventListener('click', function (e) {
+                if (e.target.classList.contains('delete-btn')) {
+                    const index = e.target.getAttribute('data-index');
+                    tasks.splice(index, 1); // Remove a tarefa.
+                    localStorage.setItem('tasks', JSON.stringify(tasks));
+                    loadTasks(); // Recarrega a tabela.
+                    alert('Tarefa excluída com sucesso!');
+                }
+            });
+
+            // Editar uma tarefa.
+            tbody.addEventListener('click', function (e) {
+                if (e.target.classList.contains('edit-btn')) {
+                    const index = e.target.getAttribute('data-index');
+                    const task = tasks[index];
+                    const newTitle = prompt('Editar Título:', task.title);
+                    const newDescription = prompt('Editar Descrição:', task.description);
+                    const newDueDate = prompt('Editar Data de Conclusão:', task.dueDate);
+
+                    if (newTitle && newDescription && newDueDate) {
+                        tasks[index] = {
+                            title: newTitle,
+                            description: newDescription,
+                            dueDate: newDueDate,
+                        };
+                        localStorage.setItem('tasks', JSON.stringify(tasks));
+                        loadTasks(); // Recarrega a tabela.
+                        alert('Tarefa editada com sucesso!');
+                    }
+                }
+            });
+
+            // Carregar as tarefas ao abrir a página.
+            loadTasks();
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Suas Tarefas</h1>
+    </header>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Descrição</th>
+                    <th>Data de Conclusão</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- As tarefas serão carregadas aqui -->
+            </tbody>
+        </table>
+        <p><a href="index.html">Voltar para o Dashboard</a></p>
+    </main>
+</body>
+</html>

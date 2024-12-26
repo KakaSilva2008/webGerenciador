@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Tarefa</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="task-handler.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Cadastrar Nova Tarefa</h1>
+    </header>
+    <main>
+        <form id="task-form">
+            <label for="title">Título da Tarefa:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="description">Descrição:</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <label for="due-date">Data de Conclusão:</label>
+            <input type="date" id="due-date" name="due-date" required>
+
+            <button type="submit">Salvar Tarefa</button>
+        </form>
+        <p><a href="index.html">Voltar para o Dashboard</a></p>
+    </main>
+</body>
+</html>
+
