@@ -7,4 +7,3 @@ document.getElementById('task-form')?.addEventListener('submit', function (e) {
         alert('Todos os campos são obrigatórios!');
     }
 });
-
